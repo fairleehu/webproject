@@ -1,0 +1,42 @@
+{% extends "base.html"  %}
+
+{% block body %} 
+        <div class="container">
+           <form  method="post" action="/app/managsend/"> 
+            {% csrf_token %}
+            {% if ty %}
+            <p><strong>你还没有填内容.</strong></p>
+            {% endif %}
+            <div class="control-group">
+    		<label class="control-label" for="Type">Type</label>
+    		<div class="controls">
+      		<input type="text" name="typeid" placeholder="会议，活动">
+    		</div>
+  	</div>
+  	<div class="control-group">
+    		<label class="control-label" for="text">content</label>
+    		<div class="controls">
+      		<input type="text" name="text" placeholder="公告内容">
+    		</div>
+  	</div>
+  	<div class="control-group">
+    		<label class="control-label" for="date">Date</label>
+    		<div class="controls">
+      		<input type="date" name="date" placeholder="date">
+    		</div>
+  	</div>
+       	 <button class="btn btn-primary" type="submit" >提交</button>
+            <br/>
+       	 </form>
+        </div>
+{% endblock %}
+{% block body2 %} 
+<div class="container">
+          <ul class="breadcrumb ">
+                  <li><a href="/app/managsend/">Send</a> <span class="divider">/</span></li>
+                  <li><a href="">Profile</a> <span class="divider">/</span></li>
+                  <li><a href="">Agree</a> <span class="divider">/</span></li>
+                  <li><a href="">Check</a> <span class="divider">/</span></li>
+          </ul>
+</div>
+{% endblock %}

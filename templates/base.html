@@ -8,32 +8,35 @@
    	 <link href="{% static 'css/bootstrap-responsive.css' %}" rel="stylesheet">
 </head>
 <body>
-<div class="navbar">
+      <div class="navbar">
   	<div class="navbar-fixed-top">
     	<a class="brand" href="">AtomOA</a>
     	<ul class="nav">
      	 <li class="active"><a href="/app/">首页</a></li>
      	 </ul>
      	  <ul class="nav pull-right">
-                    	<li class="navbar-text">Welcome</li>
-                    	<!--<li><a href="/app/profile/">Profile</a></li>
-                    	<li><a href="/app/logout/">Logout</a></li>-->
-      		<li><a href="/app/register">register</a></li>
-      		<li><a href="/app/login">login</a></li>
+             {% if user.is_authenticated %}
+                    <li class="navbar-text">Welcome, {{ user.username }}!</li>
+                    <li><a href="/app/logout">Logout</a></li>
+             {% else %}
+      		       <li><a href="/app/register">register</a></li>
+      		       <li><a href="/app/login">login</a></li>
+             {% endif %}
     	</ul>
   	</div>
 </div>
-
   	<div class="container">
 	<div class="hero-unit">
-	{% block body %}
+	       {% block body %}
               {% endblock %}
               </div>
-              </div>
+      </div>
+      {% block body2 %}
+              {% endblock %}
  	<hr>
 	<footer>
     	<div class="container">
-        		<p>&copy; AtomOA with Django 2016</p>
+        		<p>&copy; AtomOA</p>
    	 </div>
 	</footer>
 	<hr/>
@@ -41,5 +44,6 @@
     	<script src="js/bootstrap.min.js"></script>
     	<script src="{% static 'js/jquery-2.0.3.min.js' %}"></script>
     	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
   </body>
 </html>
