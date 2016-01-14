@@ -24,6 +24,7 @@ class AtSend(models.Model):
     sendType = models.CharField(max_length=20)
     sendText = models.TextField()
     sendTime = models.DateField(auto_now=True)
+    sendDept = models.CharField(max_length=6)
 
     def __unicode__(self):
         return self.sendType

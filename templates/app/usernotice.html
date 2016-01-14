@@ -6,14 +6,17 @@
                           <tr >
                                       <td width="100" bgcolor="#FFFFFF">通知类型</td>
                                       <td width="500" bgcolor="#FFFFFF">通知内容</td>
-                                      <td width="100" bgcolor="#FFFFFF">通知时间</td>
+                                      <td width="200" bgcolor="#FFFFFF">通知时间</td>
+                                      <td width="200" bgcolor="#FFFFFF">通知部门</td>
+
                           </tr>
-                          {% for no in usernotice %}
+                          {% for no in userinfo %}
 
                           <tr>
                                       <td bgcolor="#FFFFFF">&nbsp;{{ no.sendType }}</td>
                                       <td bgcolor="#FFFFFF">&nbsp;{{ no.sendText }}</td>
                                       <td bgcolor="#FFFFFF">&nbsp;{{ no.sendTime}}</td>
+                                      <td bgcolor="#FFFFFF">&nbsp;{{ no.sendDept}}</td>
                           </tr>
 
     {% endfor %}

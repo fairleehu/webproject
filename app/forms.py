@@ -30,6 +30,7 @@ class SendForm(forms.ModelForm):
     sendType = forms.CharField()
     sendText = forms.CharField(widget=forms.Textarea)
     sendTime = forms.DateField()
+    sendDept=forms.CharField()
 
     class Meta:
         model = AtSend

@@ -89,15 +89,19 @@ def managlog(request):
 @csrf_exempt
 def managsend(request):
     content_dict = {}
+    dept = Dept.objects.all()
+    content_dict['dept'] = dept
     if request.method == 'POST':
         stype = request.POST.get('typeid', '')
         scontent = request.POST.get('text', '')
         sdate = request.POST.get('date', '')
+        sdept = request.POST.get('case', '')
         if stype == "" and scontent == "":
             content_dict['ty'] = True
             return render_to_response('app/managsend.html', content_dict)
         else:
-            temp = AtSend(sendType=stype, sendText=scontent, sendTime=sdate)
+            temp = AtSend(sendType=stype, sendText=scontent,
+                          sendTime=sdate, sendDept=sdept)
             temp.save()
             content_dict['ty'] = False
             return render_to_response('app/managsend.html', content_dict)
@@ -106,5 +110,8 @@ def managsend(request):
 
 @csrf_exempt
 def usernotice(request):
-    usernotice = AtSend.objects.all()
-    return render_to_response('app/usernotice.html', {'usernotice': usernotice})
+    u = User.objects.filter(username=request.user)
+    con_dict = {}
+    for a in AtUser.objects.filter(user=u):
+        con_dict['userinfo'] = AtSend.objects.filter(sendDept=a.userDept)
+    return render_to_response('app/usernotice.html', con_dict)
