@@ -102,3 +102,9 @@ def managsend(request):
             content_dict['ty'] = False
             return render_to_response('app/managsend.html', content_dict)
     return render_to_response('app/managsend.html', content_dict)
+
+
+@csrf_exempt
+def usernotice(request):
+    usernotice = AtSend.objects.all()
+    return render_to_response('app/usernotice.html', {'usernotice': usernotice})

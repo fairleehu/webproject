@@ -13,4 +13,5 @@ urlpatterns = patterns('',
                        url(r'^userlog/$', views.userlog, name='userlog'),
                        url(r'^managlog/$', views.managlog, name='managlog'),
                        url(r'^managsend/$', views.managsend, name='managsend'),
+                       url(r'^usernotice/$', views.usernotice, name='usernotice'),
                        )

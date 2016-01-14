@@ -1,0 +1,32 @@
+{% extends "base.html"  %}
+
+{% block body %} 
+        <div class="container">
+              <table >
+                          <tr >
+                                      <td width="100" bgcolor="#FFFFFF">通知类型</td>
+                                      <td width="500" bgcolor="#FFFFFF">通知内容</td>
+                                      <td width="100" bgcolor="#FFFFFF">通知时间</td>
+                          </tr>
+                          {% for no in usernotice %}
+
+                          <tr>
+                                      <td bgcolor="#FFFFFF">&nbsp;{{ no.sendType }}</td>
+                                      <td bgcolor="#FFFFFF">&nbsp;{{ no.sendText }}</td>
+                                      <td bgcolor="#FFFFFF">&nbsp;{{ no.sendTime}}</td>
+                          </tr>
+
+    {% endfor %}
+              </table>
+        </div>
+{% endblock %}
+{% block body2 %} 
+<div class="container">
+          <ul class="breadcrumb ">
+                  <li><a href="/app/usernotice/">Notice</a> <span class="divider">/</span></li>
+                  <li><a href="">Profile</a> <span class="divider">/</span></li>
+                  <li><a href="">Leave</a> <span class="divider">/</span></li>
+                  <li><a href="">Attend</a> <span class="divider">/</span></li>
+          </ul>
+</div>
+{% endblock %}
