@@ -52,12 +52,14 @@ def user_register(request):
     registered = False
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
-        profile_form = UserProfileForm(data=request.POST)
+        profile_form = UserProfileForm(request.POST, request.FILES)
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)
             user.save()
             profile = profile_form.save(commit=False)
+            image = profile_form.cleaned_data['userImage']
+            profile_form.userImage = image
             profile.user = user
             profile.save()
             registered = True
@@ -115,3 +117,25 @@ def usernotice(request):
     for a in AtUser.objects.filter(user=u):
         con_dict['userinfo'] = AtSend.objects.filter(sendDept=a.userDept)
     return render_to_response('app/usernotice.html', con_dict)
+
+
+@csrf_exempt
+def userprofile(request):
+    for u in User.objects.filter(username=request.user):
+        for up in AtUser.objects.filter(user=u):
+            context_dict = {}
+            context_dict['user'] = u
+            context_dict['userprofile'] = up
+            return render_to_response('app/userprofile.html', context_dict)
+    return render_to_response('app/userprofile.html', context_dict)
+
+
+@csrf_exempt
+def managprofile(request):
+    for u in User.objects.filter(username=request.user):
+        for up in AtUser.objects.filter(user=u):
+            context_dict = {}
+            context_dict['user'] = u
+            context_dict['userprofile'] = up
+            return render_to_response('app/userprofile.html', context_dict)
+    return render_to_response('app/userprofile.html', context_dict)

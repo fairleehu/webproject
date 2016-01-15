@@ -28,3 +28,14 @@ class AtSend(models.Model):
 
     def __unicode__(self):
         return self.sendType
+
+
+class AtLeave(models.Model):
+    leaveName = models.CharField(max_length=20)
+    leaveType = models.CharField(max_length=10)
+    leaveDate = models.DateField()
+    leaveFDate = models.DateField()
+    leaveText = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return self.leaveName

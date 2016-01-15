@@ -1,0 +1,44 @@
+{% extends "base.html"  %}
+
+{% block body %} 
+        <div class="container">
+                      <h2>It's your profile</h2>
+                      {% if userprofile.userImage %}
+                      <img src="{{ userprofile.userImage.url }}" class="img-circle" width="100px" height="100px"/>
+                      {% endif %}
+                    <br/>
+                    <br/>
+                    <div class="tabbable tabs-left">
+                             <ul class="nav nav-tabs">
+                                     <li class="active"><a href="#tab1" data-toggle="tab">用户名</a></li>
+                                     <li><a href="#tab2" data-toggle="tab">邮箱</a></li>
+                                     <li><a href="#tab3" data-toggle="tab">部门</a></li>
+                                     <li><a href="#tab4" data-toggle="tab">职位</a></li>
+                             </ul>
+                     <div class="tab-content">
+                                  <div class="tab-pane active" id="tab1">
+                                               <p>{{user.username}}</p>
+                                  </div>
+                                  <div class="tab-pane" id="tab2">
+                                               <p>{{user.email}}</p>
+                                 </div>
+                                  <div class="tab-pane" id="tab3">
+                                               <p>{{userprofile.userDept}}</p>
+                                 </div>
+                                  <div class="tab-pane" id="tab4">
+                                               <p>{{userprofile.userJob}}</p>
+                                 </div>
+                     </div>
+                </div>
+        </div>
+{% endblock %}
+{% block body2 %} 
+<div class="container">
+          <ul class="breadcrumb ">
+                  <li><a href="/app/managsend/">Send</a> <span class="divider">/</span></li>
+                  <li><a href="/app/managprofile/">Profile</a> <span class="divider">/</span></li>
+                  <li><a href="">Agree</a> <span class="divider">/</span></li>
+                  <li><a href="">Check</a> <span class="divider">/</span></li>
+          </ul>
+</div>
+{% endblock %}
