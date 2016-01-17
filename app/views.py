@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.template import RequestContext
 # Create your views here.
 
 
@@ -19,6 +20,7 @@ def index(request):
 
 @csrf_exempt
 def user_login(request):
+    context = RequestContext(request)
     context_dict = {}
 
     if request.method == 'POST':
@@ -36,13 +38,13 @@ def user_login(request):
                     return HttpResponseRedirect('/app/managlog/')
             else:
                 context_dict['disabled_account'] = True
-                return render_to_response('app/login.html', context_dict)
+                return render_to_response('app/login.html', context_dict, context)
         else:
             print "Invalid login details: {0}, {1}".format(username, password)
             context_dict['bad_details'] = True
-            return render_to_response('app/login.html', context_dict)
+            return render_to_response('app/login.html', context_dict, context)
     else:
-        return render_to_response('app/login.html', context_dict)
+        return render_to_response('app/login.html', context_dict, context)
 
 
 @csrf_exempt
@@ -80,16 +82,17 @@ def user_logout(request):
 
 @csrf_exempt
 def userlog(request):
-    return render_to_response('app/user.html')
+    return render(request, 'app/user.html')
 
 
 @csrf_exempt
 def managlog(request):
-    return render_to_response('app/manag.html')
+    return render(request, 'app/manag.html')
 
 
 @csrf_exempt
 def managsend(request):
+    context = RequestContext(request)
     content_dict = {}
     dept = Dept.objects.all()
     content_dict['dept'] = dept
@@ -100,38 +103,41 @@ def managsend(request):
         sdept = request.POST.get('case', '')
         if stype == "" and scontent == "":
             content_dict['ty'] = True
-            return render_to_response('app/managsend.html', content_dict)
+            return render_to_response('app/managsend.html', content_dict, context)
         else:
             temp = AtSend(sendType=stype, sendText=scontent,
                           sendTime=sdate, sendDept=sdept)
             temp.save()
             content_dict['ty'] = False
-            return render_to_response('app/managsend.html', content_dict)
-    return render_to_response('app/managsend.html', content_dict)
+            return render_to_response('app/managsend.html', content_dict, context)
+    return render_to_response('app/managsend.html', content_dict, context)
 
 
 @csrf_exempt
 def usernotice(request):
+    context = RequestContext(request)
     u = User.objects.filter(username=request.user)
     con_dict = {}
     for a in AtUser.objects.filter(user=u):
         con_dict['userinfo'] = AtSend.objects.filter(sendDept=a.userDept)
-    return render_to_response('app/usernotice.html', con_dict)
+    return render_to_response('app/usernotice.html', con_dict, context)
 
 
 @csrf_exempt
 def userprofile(request):
+    context = RequestContext(request)
     for u in User.objects.filter(username=request.user):
         for up in AtUser.objects.filter(user=u):
             context_dict = {}
             context_dict['user'] = u
             context_dict['userprofile'] = up
-            return render_to_response('app/userprofile.html', context_dict)
-    return render_to_response('app/userprofile.html', context_dict)
+            return render_to_response('app/userprofile.html', context_dict, context)
+    return render_to_response('app/userprofile.html', context_dict, context)
 
 
 @csrf_exempt
 def managprofile(request):
+    context = RequestContext(request)
     for u in User.objects.filter(username=request.user):
         for up in AtUser.objects.filter(user=u):
             context_dict = {}
@@ -143,6 +149,7 @@ def managprofile(request):
 
 @csrf_exempt
 def userleave(request):
+    context = RequestContext(request)
     dicts = {}
     if request.method == 'POST':
         leaveform = LeaveForm(data=request.POST)
@@ -161,6 +168,7 @@ def userleave(request):
 
 @csrf_exempt
 def managagree(request):
+    context = RequestContext(request)
     u = User.objects.filter(username=request.user)
     con_dict = {}
     for a in AtUser.objects.filter(user=u):
