@@ -139,3 +139,21 @@ def managprofile(request):
             context_dict['userprofile'] = up
             return render_to_response('app/userprofile.html', context_dict)
     return render_to_response('app/userprofile.html', context_dict)
+
+
+@csrf_exempt
+def userleave(request):
+    dicts = {}
+    if request.method == 'POST':
+        leaveform = LeaveForm(data=request.POST)
+        if leaveform.is_valid():
+            leaveform.save(commit=False)
+            leaveform.save()
+            dicts['leaveform'] = leaveform
+            return HttpResponseRedirect('/app/userleave/')
+        else:
+            print leaveform.errors
+    else:
+        leaveform = LeaveForm()
+    dicts['leaveform'] = leaveform
+    return render_to_response('app/userleave.html', dicts)

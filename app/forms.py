@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth.models import User
 from app.models import *
 from django.contrib.admin import widgets
+from django.forms.extras.widgets import SelectDateWidget
 
 
 class UserForm(forms.ModelForm):
@@ -30,8 +31,27 @@ class SendForm(forms.ModelForm):
     sendType = forms.CharField()
     sendText = forms.CharField(widget=forms.Textarea)
     sendTime = forms.DateField()
-    sendDept=forms.CharField()
+    sendDept = forms.CharField()
 
     class Meta:
         model = AtSend
         fields = ('sendType', 'sendText', 'sendTime')
+
+TITLE_CHOICES = (('0', '年假'),
+                 ('1', '事假'),
+                 ('2', '病假'),)
+
+
+class LeaveForm(forms.ModelForm):
+    leaveName = forms.CharField()
+    leaveType = forms.ChoiceField(required=True, choices=TITLE_CHOICES)
+    leaveDate = forms.DateTimeField(
+        required=True, label='开始时间', widget=forms.extras.widgets.SelectDateWidget)
+    leaveFDate = forms.DateTimeField(
+        required=True, label='截止时间', widget=forms.extras.widgets.SelectDateWidget)
+    leaveText = forms.CharField(widget=forms.Textarea)
+
+    class Meta:
+        model = AtLeave
+        fields = ('leaveName', 'leaveType', 'leaveDate',
+                  'leaveFDate', 'leaveText')

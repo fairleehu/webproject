@@ -20,4 +20,6 @@ urlpatterns = patterns('',
                            name='userprofile'),
                        url(r'^managprofile/$', views.managprofile,
                            name='managprofile'),
+                       url(r'^userleave/$', views.userleave,
+                           name='userleave'),
                        )

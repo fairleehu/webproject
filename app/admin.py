@@ -12,6 +12,9 @@ class AtUserAdmin(admin.ModelAdmin):
     list_display = ('user', 'userDept', 'userJob', 'userImage')
 
 
+class AtLeaveAdmin(admin.ModelAdmin):
+    list_display = ('leaveName', 'leaveType', 'leaveDate', 'leaveFDate','leaveText')
 admin.site.register(AtUser, AtUserAdmin)
 admin.site.register(Dept)
 admin.site.register(AtSend, AtSendAdmin)
+admin.site.register(AtLeave, AtLeaveAdmin)
