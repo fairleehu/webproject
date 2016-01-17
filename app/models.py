@@ -37,6 +37,7 @@ class AtSend(models.Model):
 
 class AtLeave(models.Model):
     leaveName = models.CharField(max_length=20)
+    leaveDept = models.CharField(max_length=5)
     leaveType = models.CharField(
         u'请假类型', choices=TITLE_CHOICES, max_length=10, null=True, blank=True)
     leaveDate = models.DateField(u"开始日期")
@@ -44,4 +45,4 @@ class AtLeave(models.Model):
     leaveText = models.CharField(max_length=100)
 
     def __unicode__(self):
-        return self.leaveType
+        return self.leaveName

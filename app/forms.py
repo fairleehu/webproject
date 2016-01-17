@@ -37,13 +37,14 @@ class SendForm(forms.ModelForm):
         model = AtSend
         fields = ('sendType', 'sendText', 'sendTime')
 
-TITLE_CHOICES = (('0', '年假'),
-                 ('1', '事假'),
-                 ('2', '病假'),)
+TITLE_CHOICES = (('年假', '年假'),
+                 ('事假', '事假'),
+                 ('病假', '病假'),)
 
 
 class LeaveForm(forms.ModelForm):
     leaveName = forms.CharField()
+    leaveDept = forms.CharField()
     leaveType = forms.ChoiceField(required=True, choices=TITLE_CHOICES)
     leaveDate = forms.DateTimeField(
         required=True, label='开始时间', widget=forms.extras.widgets.SelectDateWidget)
@@ -53,5 +54,5 @@ class LeaveForm(forms.ModelForm):
 
     class Meta:
         model = AtLeave
-        fields = ('leaveName', 'leaveType', 'leaveDate',
+        fields = ('leaveName', 'leaveDept', 'leaveType', 'leaveDate',
                   'leaveFDate', 'leaveText')

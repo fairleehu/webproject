@@ -1,0 +1,41 @@
+{% extends "base.html"  %}
+
+{% block body %} 
+        <div class="container">
+                              <table >
+                          <tr >
+                                      <td width="100" bgcolor="#FFFFFF">请假人</td>
+                                      <td width="100" bgcolor="#FFFFFF">请假部门</td>
+                                      <td width="100" bgcolor="#FFFFFF">请假类型</td>
+                                      <td width="200" bgcolor="#FFFFFF">开始时间</td>
+                                      <td width="200" bgcolor="#FFFFFF">结束时间</td>
+                                      <td width="300" bgcolor="#FFFFFF">具体原因</td>
+                                      <td width="200" bgcolor="#FFFFFF">操作</td>
+
+                          </tr>
+                          {% for no in leaveinfo %}
+
+                          <tr>
+                                      <td bgcolor="#FFFFFF">&nbsp;{{ no.leaveName }}</td>
+                                      <td bgcolor="#FFFFFF">&nbsp;{{ no.leaveDept }}</td>
+                                      <td bgcolor="#FFFFFF">&nbsp;{{ no.leaveType }}</td>
+                                      <td bgcolor="#FFFFFF">&nbsp;{{ no.leaveDate}}</td>
+                                      <td bgcolor="#FFFFFF">&nbsp;{{ no.leaveFDate}}</td>
+                                      <td bgcolor="#FFFFFF">&nbsp;{{ no.leaveText}}</td>
+                                      <td bgcolor="#FFFFFF"><a href="/app/delete/{{no.id}}">删除</a> <a href="">同意</a><a href="">不同意</a></td>
+                          </tr>
+
+                        {% endfor %}
+              </table>
+        </div>
+{% endblock %}
+{% block body2 %} 
+<div class="container">
+          <ul class="breadcrumb ">
+                  <li><a href="/app/managsend/">Send</a> <span class="divider">/</span></li>
+                  <li><a href="/app/managprofile/">Profile</a> <span class="divider">/</span></li>
+                  <li><a href="/app/managagree/">Agree</a> <span class="divider">/</span></li>
+                  <li><a href="">Check</a> <span class="divider">/</span></li>
+          </ul>
+</div>
+{% endblock %}

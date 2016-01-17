@@ -22,4 +22,8 @@ urlpatterns = patterns('',
                            name='managprofile'),
                        url(r'^userleave/$', views.userleave,
                            name='userleave'),
+                       url(r'^managagree/$', views.managagree,
+                           name='managagree'),
+                       url(r'^delete/(?P<id>[\d]+)$', views.delete,
+                           name='delete'),
                        )
