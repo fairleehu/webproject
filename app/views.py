@@ -143,8 +143,8 @@ def managprofile(request):
             context_dict = {}
             context_dict['user'] = u
             context_dict['userprofile'] = up
-            return render_to_response('app/managprofile.html', context_dict)
-    return render_to_response('app/managprofile.html', context_dict)
+            return render_to_response('app/managprofile.html', context_dict, context)
+    return render_to_response('app/managprofile.html', context_dict, context)
 
 
 @csrf_exempt
@@ -163,7 +163,7 @@ def userleave(request):
     else:
         leaveform = LeaveForm()
     dicts['leaveform'] = leaveform
-    return render_to_response('app/userleave.html', dicts)
+    return render_to_response('app/userleave.html', dicts, context)
 
 
 @csrf_exempt
@@ -173,7 +173,7 @@ def managagree(request):
     con_dict = {}
     for a in AtUser.objects.filter(user=u):
         con_dict['leaveinfo'] = AtLeave.objects.filter(leaveDept=a.userDept)
-    return render_to_response('app/managagree.html', con_dict)
+    return render_to_response('app/managagree.html', con_dict, context)
 
 
 @csrf_exempt
